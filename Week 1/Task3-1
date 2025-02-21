@@ -1,0 +1,37 @@
+# Import necessary libraries
+# %pip install pyttsx3
+
+import pyttsx3
+
+# Function to generate a voice response based on characteristics
+def generate_voice_response(prompt):
+    # Initialize the text-to-speech engine
+    engine = pyttsx3.init()
+    
+    # Set properties for the voice
+    engine.setProperty('rate', 150)  # Slow pace
+    engine.setProperty('volume', 1)   # Volume (0.0 to 1.0)
+    
+    # Get available voices and set a friendly voice (if available)
+    voices = engine.getProperty('voices')
+    for voice in voices:
+        if 'english' in voice.languages:
+            engine.setProperty('voice', voice.id)
+            break
+    
+  # Speak the response based on the prompt
+    response = f"You described the voice as: {prompt}"
+    engine.say(response)
+    engine.runAndWait()
+
+    # Main function to run the system
+def main():
+    # Capture the descriptive text prompt from the user
+    # prompt = "warm and soothing, with a medium pitch, slow pace, and a friendly tone."
+    prompt = "A female senior with a guttural voice and an American accent. Their voice should be hoarse and have a boisterous intensity."
+
+    generate_voice_response(prompt)
+
+# Run the main function
+if __name__ == "__main__":
+    main()
